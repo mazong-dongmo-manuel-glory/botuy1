@@ -8,11 +8,7 @@ import (
 
 func (getter *GetUpdates) Get(botid string, method string) *Update {
 	url := fmt.Sprintf("https://api.telegram.org/bot%v/%v", botid, method)
-	fmt.Println(url)
 	content, err := http.Get(url)
-	//read := make([]byte, 9000)
-	//n, _ := content.Body.Read(read)
-	//fmt.Printf("\n%s\n", read[:n])
 	var updates *Update
 	if err != nil {
 		return nil
@@ -23,6 +19,11 @@ func (getter *GetUpdates) Get(botid string, method string) *Update {
 		return nil
 	}
 	fmt.Printf("%v\n", len(updates.Result))
-	fmt.Printf("%v\n", updates.Result[len(updates.Result)-1])
+	fmt.Printf("%v\n", updates.Result[len(updates.Result)])
+
+	if len(updates.Result) != 0 {
+		fmt.Printf("%v\n", updates.Result[len(updates.Result)-1])
+
+	}
 	return updates
 }

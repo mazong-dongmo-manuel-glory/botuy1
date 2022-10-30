@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	botid := "5074588513:AAEOHB2-lHIrt9OI_Buw_3VZKXBJ3i58N5s"
+	botid := "5757526655:AAEDpfyVrZvBZZsdULg8lktpCmwVoMxSaV0"
 	for {
 		t := time.NewTicker(time.Second * 1)
 		<-t.C
@@ -15,4 +15,6 @@ func main() {
 		getter.Get(botid, "getUpdates")
 
 	}
+	//newsapi.FetchNews("fr")
+
 }
