@@ -9,21 +9,19 @@ import (
 func (getter *GetUpdates) Get(botid string, method string) *Update {
 	url := fmt.Sprintf("https://api.telegram.org/bot%v/%v", botid, method)
 	content, err := http.Get(url)
-	var updates *Update
+	reader := make([]byte, 10024)
+	n, _ := content.Body.Read(reader)
+	fmt.Printf("%s\n", reader[:n])
+	var update *Update
 	if err != nil {
 		return nil
 	}
 	decoder := json.NewDecoder(content.Body)
-	err = decoder.Decode(&updates)
+	err = decoder.Decode(&update)
 	if err != nil {
+		fmt.Printf("error decoding")
 		return nil
 	}
-	fmt.Printf("%v\n", len(updates.Result))
-	fmt.Printf("%v\n", updates.Result[len(updates.Result)])
 
-	if len(updates.Result) != 0 {
-		fmt.Printf("%v\n", updates.Result[len(updates.Result)-1])
-
-	}
-	return updates
+	return update
 }

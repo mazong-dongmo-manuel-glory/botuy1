@@ -35,6 +35,6 @@ func FetchNews(lang string) *Response {
 	decoder := json.NewDecoder(content.Body)
 	response := &Response{}
 	decoder.Decode(response)
-	fmt.Printf("%v", response)
+
 	return response
 }
